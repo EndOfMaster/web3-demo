@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wallet Connecting</title>
+</head>
+<body>
+<div>
+    <button class="enableEthereumButton">Enable Ethereum</button>
+    <input class="value" type="number">eth
+    <button class="deposit">质押</button>
+    <h2>Account: <span class="showAccount"></span></h2>
+    <h2>Network: <span class="showNetwork"></span></h2>
+    <h2>Name: <span class="showName"></span></h2>
+    <h2>余额: <span class="balanceOf"></span></h2>
+</div>
+</body>
+<script src="index.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/bignumber.js/9.0.0/bignumber.min.js"></script>
+<script type="text/javascript">
+    window.addEventListener('load', function () {
+        checkMetamask();
+        agicName();
+    });
+    const ethereumButton = document.querySelector('.enableEthereumButton');
+    const deposit = document.querySelector('.deposit');
+    const showAccount = document.querySelector('.showAccount');
+    const showNetwork = document.querySelector('.showNetwork');
+    const showName = document.querySelector('.showName');
+    const balanceOf = document.querySelector('.balanceOf');
+    const eth = document.querySelector('.value');
+
+    ethereumButton.addEventListener('click', () => {
+        getAccount();
+    });
+
+    deposit.addEventListener('click', () => {
+        doDeposit();
+    });
+
+</script>
+</html>
