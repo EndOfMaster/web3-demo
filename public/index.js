@@ -12,16 +12,6 @@ const networkList = ({
     "42": "Kovan Test Network"
 });
 
-function getWeb3() {
-    let web3;
-    if (typeof web3 !== 'undefined') {
-        web3 = new Web3(web3.currentProvider);
-    } else {
-        web3 = new Web3("https://api.infura.io/v1/jsonrpc/ropsten");
-    }
-    return web3;
-}
-
 let Agic;
 let agicInstance;
 
@@ -65,6 +55,7 @@ function agicName() {
     })
 }
 
+//具体操作合约方法需要验证网络而且切换合约地址
 function getBalanceOf(owner) {
     agicInstance.balanceOf(owner, function (err, data) {
         const e = new BigNumber('1e18');
@@ -85,19 +76,11 @@ function doDeposit() {
     }
 }
 
-// let agicName = async () => {
-//     try {
-//         let v2 = await agicInstance.methods.name().call();
-//         console.log('v2:', v2)
-//         showName.innerHTML(v2);
-//     } catch (e) {
-//         console.log(e)
-//     }
-// };
-
+//事件需要重新加载余额和交易订单等
 ethereum.on('accountsChanged', function (accounts) {
     account = accounts
     showAccount.innerHTML = account;
+    getBalanceOf(accounts);
 });
 
 ethereum.on('networkChanged', function (networkId) {
@@ -569,4 +552,5 @@ const abi = ([
         "type": "receive"
     }
 ]);
+//must string
 const address = ("0x715ba73309922E9cE30b428891BEFC9BA4a3c8CB");
